@@ -31,6 +31,11 @@ export RETAKES="${RETAKES:-0}"
 export ANNOUNCEMENT_IP="${ANNOUNCEMENT_IP:-}"
 export NOMASTER="${NOMASTER:-}"
 
+# install challenge plugins
+curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-challenge-files.zip --output server-challenge-files.zip --silent
+mv server-challenge-files.zip $CSGO_DIR/csgo
+unzip $CSGO_DIR/csgo/server-challenged-files.zip
+
 # Attempt to update CSGO before starting the server
 
 [[ -z ${CI+x} ]] && "$STEAMCMD_DIR/steamcmd.sh" +login anonymous +force_install_dir "$CSGO_DIR" +app_update "$CSGO_APP_ID" +quit
