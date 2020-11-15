@@ -34,7 +34,7 @@ export NOMASTER="${NOMASTER:-}"
 # install challenge plugins
 curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-challenge-files.zip --output server-challenge-files.zip --silent
 mv server-challenge-files.zip $CSGO_DIR/csgo
-unzip $CSGO_DIR/csgo/server-challenged-files.zip
+unzip $CSGO_DIR/csgo/server-challenge-files.zip
 
 # Attempt to update CSGO before starting the server
 
