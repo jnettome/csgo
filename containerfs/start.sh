@@ -118,9 +118,9 @@ if grep -q 'steam.sh' "$SRCDS_RUN"; then
 fi
 
 # install challenge plugins
-curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-challenge-files.zip --output server-challenge-files.zip --silent
-mv server-challenge-files.zip $CSGO_DIR/csgo
-unzip $CSGO_DIR/csgo/server-challenge-files.zip
+curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-plugin-folder.tar.gz --output server-plugin-folder.tar.gz --silent
+mv server-plugin-folder.tar.gz $CSGO_DIR/csgo
+tar zxvf $CSGO_DIR/csgo/server-plugin-folder.tar.gz
 
 # Start the server
 exec "$BASH" "$SRCDS_RUN" "${SRCDS_ARGUMENTS[@]}"
