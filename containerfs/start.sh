@@ -119,8 +119,11 @@ fi
 
 # install challenge plugins
 curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-plugin-folder.tar.gz --output server-plugin-folder.tar.gz --silent
-mv server-plugin-folder.tar.gz $CSGO_DIR/csgo
-tar zxvf $CSGO_DIR/csgo/server-plugin-folder.tar.gz
+mv server-plugin-folder.tar.gz
+tar zxvf server-plugin-folder.tar.gz
+cp -R addons $CSGO_DIR/csgo
+cp -R maps $CSGO_DIR/csgo
+
 
 # Start the server
 exec "$BASH" "$SRCDS_RUN" "${SRCDS_ARGUMENTS[@]}"
