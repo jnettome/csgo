@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
-CONTAINER_NAME ?= csgo-dedicated-server 
-IMAGE_NAME ?= kmallea/csgo:latest
+CONTAINER_NAME ?= csgo-dedicated-server
+IMAGE_NAME ?= jnettome/csgo:latest
 SERVER_HOSTNAME ?= Counter-Strike: Global Offensive Dedicated Server
 SERVER_PASSWORD ?=
 RCON_PASSWORD ?= changeme
@@ -98,4 +98,3 @@ test:
 stop:
 	docker stop $(CONTAINER_NAME)
 	docker rm $(CONTAINER_NAME)
-	

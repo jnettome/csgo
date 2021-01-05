@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
- 
+
 # These envvars should've been set by the Dockerfile
 # If they're not set then something went wrong during the build
 : "${STEAM_DIR:?'ERROR: STEAM_DIR IS NOT SET!'}"
 : "${STEAMCMD_DIR:?'ERROR: STEAMCMD_DIR IS NOT SET!'}"
 : "${CSGO_APP_ID:?'ERROR: CSGO_APP_ID IS NOT SET!'}"
 : "${CSGO_DIR:?'ERROR: CSGO_DIR IS NOT SET!'}"
- 
+
 export SERVER_HOSTNAME="${SERVER_HOSTNAME:-Counter-Strike: Global Offensive Dedicated Server}"
 export SERVER_PASSWORD="${SERVER_PASSWORD:-}"
 export RCON_PASSWORD="${RCON_PASSWORD:-changeme}"
@@ -118,11 +118,11 @@ if grep -q 'steam.sh' "$SRCDS_RUN"; then
 fi
 
 # install challenge plugins
-curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-plugin-folder.tar.gz --output server-plugin-folder.tar.gz --silent
-mv server-plugin-folder.tar.gz
-tar zxvf server-plugin-folder.tar.gz
-cp -R addons $CSGO_DIR/csgo
-cp -R maps $CSGO_DIR/csgo
+# curl https://queota-storage.s3-sa-east-1.amazonaws.com/server-plugin-folder.tar.gz --output server-plugin-folder.tar.gz --silent
+# mv server-plugin-folder.tar.gz
+# tar zxvf server-plugin-folder.tar.gz
+# cp -R addons $CSGO_DIR/csgo
+# cp -R maps $CSGO_DIR/csgo
 
 
 # Start the server
