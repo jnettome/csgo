@@ -83,3 +83,4 @@ done
 
 echo "de_vertigo" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
 echo "de_cbble" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+echo "de_cache" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
