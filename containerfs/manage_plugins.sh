@@ -80,3 +80,6 @@ IFS=',' read -ra STEAMIDS <<< "$SOURCEMOD_ADMINS"
 for id in "${STEAMIDS[@]}"; do
     echo "\"$id\" \"99:z\"" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/admins_simple.ini"
 done
+
+echo "de_vertigo" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+echo "de_cbble" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
