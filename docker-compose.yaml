@@ -6,13 +6,13 @@ volumes:
 
 services:
   csgo:
-    image: kmallea/csgo:latest
+    image: csgo:latest
     container_name: csgo-ds
 
     environment:
-      SERVER_HOSTNAME: "Counter-Strike: Global Offensive Dedicated Server"
-      SERVER_PASSWORD:
-      RCON_PASSWORD: changeme
+      SERVER_HOSTNAME: "Mix #1 @ MixDoFeijao"
+      SERVER_PASSWORD: mix
+      RCON_PASSWORD: l0c0m071v4
       STEAM_ACCOUNT: changeme
       AUTHKEY: changeme
       SOURCEMOD_ADMINS: comma,delimited,list,of,steam,ids

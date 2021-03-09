@@ -44,6 +44,16 @@ sv_password "$SERVER_PASSWORD"
 sv_cheats 0
 exec banned_user.cfg
 exec banned_ip.cfg
+sv_maxrate 0
+sv_minrate 30000
+sv_maxcmdrate 128
+sv_mincmdrate 128
+sv_minupdaterate 128
+sv_maxupdaterate 128
+sm_cvar sv_maxcmdrate 128
+sv_mincmdrate 128
+sv_minupdaterate 128
+sm_cvar sv_maxupdaterate 128
 AUTOEXECCFG
 
 # Create dynamic server config
@@ -57,7 +67,7 @@ tv_maxclients 10
 tv_maxrate 0
 tv_overridemaster 0
 tv_relayvoice 1
-tv_snapshotrate 64
+tv_snapshotrate 128
 tv_timeout 60
 tv_transmitall 1
 writeid
