@@ -54,6 +54,20 @@ sm_cvar sv_maxcmdrate 128
 sv_mincmdrate 128
 sv_minupdaterate 128
 sm_cvar sv_maxupdaterate 128
+
+sv_tags "hitbox,hitbox.zone,htbx,128"
+sv_region 2
+host_name_store 1
+host_info_show 2
+host_players_show 2
+sv_contact "servers@hitbox.zone"
+tv_name "hitbox.zone GOTV"
+tv_title "hitbox.zone GOTV"
+
+sv_server_graphic1 "hitboxzone1.png"
+sv_server_graphic2 "hitboxzone2.png"
+
+tv_maxclients 5
 AUTOEXECCFG
 
 # Create dynamic server config

@@ -6,12 +6,21 @@ set -ueo pipefail
 
 export RETAKES="${RETAKES:-0}"
 
-INSTALL_PLUGINS="${INSTALL_PLUGINS:-https://mms.alliedmods.net/mmsdrop/1.12/mmsource-1.12.0-git1147-linux.tar.gz
-https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6663-linux.tar.gz
-http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git132-linux.tar.gz
-https://github.com/splewis/csgo-practice-mode/releases/download/1.3.3/practicemode_1.3.3.zip
-https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip
-}"
+export HITBOX_PUG="${HITBOX_PUG:-0}"
+export HITBOX_PRACTICE="${HITBOX_PRACTICE:-0}"
+export HITBOX_SCRIM="${HITBOX_SCRIM:-0}"
+
+if [ "$HITBOX_PUG" = "1" ]; then
+  INSTALL_PLUGINS="https://github.com/splewis/csgo-pug-setup/releases/download/2.0.5/pugsetup_2.0.5.zip"
+fi
+
+if [ "$HITBOX_PRACTICE" = "1" ]; then
+  INSTALL_PLUGINS="https://github.com/splewis/csgo-practice-mode/releases/download/1.3.3/practicemode_1.3.3.zip"
+fi
+
+if [ "$HITBOX_SCRIM" = "1" ]; then
+  INSTALL_PLUGINS="https://github.com/splewis/get5/releases/download/0.7.1/get5_0.7.1.zip"
+fi
 
 get_checksum_from_string () {
   local md5
@@ -67,6 +76,17 @@ install_plugin() {
 echo "Installing plugins..."
 
 mkdir -p "$CSGO_DIR/csgo"
+
+# instala nois
+echo "Installing hitbox.zone base plugins (sourcemod, metamod and required ext)"
+curl https://hitboxzone-public.s3-sa-east-1.amazonaws.com/hitbox-base-plugins.tar.gz --output hitbox-base-plugins.tar.gz
+tar -zxvf hitbox-base-plugins.tar.gz -C "$CSGO_DIR/"
+
+echo "Installing our management plugin"
+curl https://hitboxzone-public.s3-sa-east-1.amazonaws.com/hitbox_stats.smx --output "$CSGO_DIR/csgo/addons/sourcemod/plugins/hitbox_stats.smx"
+
+echo "Installing 3rd party plugins..."
+
 IFS=' ' read -ra PLUGIN_URLS <<< "$(echo "$INSTALL_PLUGINS" | tr "\n" " ")"
 for URL in "${PLUGIN_URLS[@]}"; do
   install_plugin "$URL"
@@ -81,6 +101,10 @@ for id in "${STEAMIDS[@]}"; do
     echo "\"$id\" \"99:z\"" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/admins_simple.ini"
 done
 
-echo "de_vertigo" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
-echo "de_cbble" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
-echo "de_cache" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+if [ "$HITBOX_PUG" = "1" ]; then
+  echo "de_vertigo" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+  echo "de_cbble" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+  echo "de_cache" >> "$CSGO_DIR/csgo/addons/sourcemod/configs/pugsetup/maps.txt"
+fi
+
+echo "Done"

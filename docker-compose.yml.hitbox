@@ -1,0 +1,67 @@
+version: "3.7"
+
+services:
+  csgo_fbgg_a:
+    image: jnettome-csgo:latest
+    container_name: fbgg-csgo
+    environment:
+      SERVER_HOSTNAME: ${SERVER_HOSTNAME}
+      SERVER_PASSWORD: ${SERVER_PASSWORD}
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      STEAM_ACCOUNT: ${STEAM_ACCOUNT}
+      AUTHKEY: ${AUTHKEY}
+      SOURCEMOD_ADMINS: ${SOURCEMOD_ADMINS}
+      IP: ${IP}
+      PORT: ${PORT}
+      TV_PORT: ${TV_PORT}
+      TICKRATE: ${TICKRATE}
+      FPS_MAX: ${FPS_MAX}
+      GAME_TYPE: ${GAME_TYPE}
+      GAME_MODE: ${GAME_MODE}
+      MAP: ${MAP}
+      MAPGROUP: ${MAPGROUP}
+      MAXPLAYERS: ${MAXPLAYERS}
+      TV_ENABLE: ${TV_ENABLE}
+      LAN: ${LAN}
+      RETAKES: ${RETAKES}
+      ANNOUNCEMENT_IP: ${ANNOUNCEMENT_IP}
+      NOMASTER: ${NOMASTER}
+      HITBOX_PUG: ${HITBOX_PUG}
+      HITBOX_PRACTICE: ${HITBOX_PRACTICE}
+      HITBOX_SCRIM: ${HITBOX_SCRIM}
+    volumes:
+      - type: volume
+        source: csgo_fbgg_data_a
+        target: /home/steam/csgo
+    network_mode: "host"
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  ftpd_server:
+    image: stilliard/pure-ftpd
+    container_name: pure-ftpd
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes: # remember to replace /folder_on_disk/ with the path to where you want to store the files on the host machine
+      - "csgo_fbgg_data_a:/home/ftpuser/"
+      # - "/folder_on_disk/passwd:/etc/pure-ftpd/passwd"
+    environment:
+      PUBLICHOST: ${ANNOUNCEMENT_IP}
+      FTP_USER_NAME: ftpuser
+      FTP_USER_PASS: ${FTP_USER_PASS}
+      FTP_USER_HOME: /home/ftpuser
+    restart: always
+
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
+
+volumes:
+  csgo_fbgg_data_a:
+    name: csgo_fbgg_data_a

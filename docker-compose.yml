@@ -1,0 +1,76 @@
+version: "3.7"
+
+volumes:
+  csgo-data:
+    name: csgo-data
+
+services:
+  csgo:
+    image: csgo:latest
+    container_name: csgo-ds
+    build: ./
+    environment:
+      SERVER_HOSTNAME: "Mix #1 @ MixDoFeijao"
+      SERVER_PASSWORD: mix
+      RCON_PASSWORD: l0c0m071v4
+      STEAM_ACCOUNT: B005C1E6183206F374FF4D8C4965072D
+      AUTHKEY: changeme
+      SOURCEMOD_ADMINS: STEAM_0:0:1591673
+      IP: 0.0.0.0
+      #IP: 18.231.128.72
+      PORT: 27015
+      TV_PORT: 27020
+      TICKRATE: 128
+      FPS_MAX: 300
+      GAME_TYPE: 0
+      GAME_MODE: 1
+      MAP: de_dust2
+      MAPGROUP: mg_active
+      MAXPLAYERS: 14
+      TV_ENABLE: 1
+      LAN: 0
+      RETAKES: 0
+      HITBOX_PUG: 0
+      HITBOX_PRACTICE: 1
+      HITBOX_SCRIM: 0
+
+    volumes:
+      - type: volume
+        source: csgo-data
+        target: /home/steam/csgo
+
+    network_mode: "host"
+
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+#   ftpd_server:
+#     image: stilliard/pure-ftpd
+#     container_name: pure-ftpd
+#     ports:
+#       - "21:21"
+#       - "30000-30009:30000-30009"
+#     volumes: # remember to replace /folder_on_disk/ with the path to where you want to store the files on the host machine
+#       - "csgo-data:/home/fbgguser/"
+#     environment:
+#       PUBLICHOST: "0.0.0.0"
+#       FTP_USER_NAME: fbgguser
+#       FTP_USER_PASS: password
+#       FTP_USER_HOME: /home/fbgguser
+# # also for ssl/tls:
+# #      ADDED_FLAGS: "--tls=2"
+#     restart: always
+
+#   csgo-filestash:
+#     container_name: filestash
+#     image: machines/filestash
+#     restart: always
+#     environment:
+#     - APPLICATION_URL=18.231.128.72:8334
+#     # - GDRIVE_CLIENT_ID=<gdrive_client>
+#     # - GDRIVE_CLIENT_SECRET=<gdrive_secret>
+#     # - DROPBOX_CLIENT_ID=<dropbox_key>
+#     # - ONLYOFFICE_URL=http://onlyoffice
+#     ports:
+#     - "8334:8334"
